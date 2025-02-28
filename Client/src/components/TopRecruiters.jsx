@@ -11,10 +11,10 @@ const TopRecruiters = () => {
         { name: "Callaway", logo: "🟣", rating: 4.9, jobs: 4 },
         { name: "Baseball", logo: "⚾", rating: 4.4, jobs: 2 },
         { name: "Carols", logo: "🎭", rating: 4.2, jobs: 0 },
-        { name: "Wanderu", logo: "🗺️", rating: 4.7, jobs: 3 },
-        { name: "Amazon", logo: "🛒", rating: 4.9, jobs: 6 },
-        { name: "Fire Works", logo: "💬", rating: 4.3, jobs: 2 },
-        { name: "Linkedin", logo: "📇", rating: 4.7, jobs: 5 },
+        // { name: "Wanderu", logo: "🗺️", rating: 4.7, jobs: 3 },
+        // { name: "Amazon", logo: "🛒", rating: 4.9, jobs: 6 },
+        // { name: "Fire Works", logo: "💬", rating: 4.3, jobs: 2 },
+        // { name: "Linkedin", logo: "📇", rating: 4.7, jobs: 5 },
       ];
       
   return (

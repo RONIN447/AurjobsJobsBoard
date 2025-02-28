@@ -103,9 +103,6 @@ const CandidateSignup = ({ navigateToLogin }) => {
         } finally {
             setLoading(false)
         }
-
-
-
         setFormData({
             firstname: '',
             lastname: '',
@@ -118,10 +115,6 @@ const CandidateSignup = ({ navigateToLogin }) => {
             resumeUrl: ""
         })
     };
-
-
-
-
 
     useEffect(() => {
         // Check password match whenever password or confirmPassword changes
@@ -141,13 +134,10 @@ const CandidateSignup = ({ navigateToLogin }) => {
     }, [formData.password, formData.confirmPassword]);
 
     return (
-
-
-
         <div className="min-h-screen w-full flex items-center justify-center bg-white py-12 px-4 [&::-webkit-scrollbar]:hidden">
-
+            
             <div className="flex flex-col md:flex-row w-[85%] max-w-4xl justify-center">
-            {/* employer button  */}
+                {/* employer button  */}
                 <Link
                     to="/company_register"
                     className="absolute top-24 right-4 inline-flex items-center px-4 py-2  text-orange-500 rounded-lg hover:text-blue-500 duration-300 text-medium font-medium "
@@ -158,10 +148,6 @@ const CandidateSignup = ({ navigateToLogin }) => {
                 <div className="space-y-2">
                     <h2 className="text-3xl font-sans font-bold text-black mb-6 text-center">Create a new Account</h2>
                     <p className='text-center'>Join us today!</p>
-
-
-
-
                     <form onSubmit={handleSubmit} className="w-full max-w-4xl bg-white rounded-xl shadow-lg p-6">
                         <div className="mb-6">
 
@@ -226,7 +212,6 @@ const CandidateSignup = ({ navigateToLogin }) => {
                                             />
                                         </div>
                                     </div>
-
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
@@ -262,11 +247,8 @@ const CandidateSignup = ({ navigateToLogin }) => {
                                             />
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
-
                             <div className={`transition-transform duration-500 transform ${currentSection === 2 ? 'translate-x-0' : 'translate-x-full'
                                 } ${currentSection === 1 ? 'hidden' : ''}`}>
                                 {/* Additional Details Section */}
@@ -297,9 +279,7 @@ const CandidateSignup = ({ navigateToLogin }) => {
                                                 name="resumeUrl"
                                                 value={formData.resumeUrl}
                                                 onChange={handleChange}
-                                                className="w-full px-3 py-2.5 border-2 border-blue-500 rounded-lg text-gray-900 hover:border-orange-500
-                      
-                      transition-all duration-300"
+                                                className="w-full px-3 py-2 border-2 border-blue-500 rounded-lg text-gray-900 hover:border-orange-500 transition-all duration-300"
                                                 placeholder="Enter resume URL"
                                             />
                                         </div>
@@ -307,113 +287,100 @@ const CandidateSignup = ({ navigateToLogin }) => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <label className="text-sm font-medium text-gray-700 mb-2 block">
-                                                Password <span className="text-red-500">*</span>
+                                                Password <span className="text-red-500 ml-1">*</span>
                                             </label>
                                             <div className="relative">
                                                 <input
-                                                    type={passwordVisible.password ? "text" : "password"}
+                                                    type={passwordVisible.password ? 'text' : 'password'}
                                                     name="password"
                                                     value={formData.password}
                                                     onChange={handleChange}
-                                                    className="w-full px-3 py-2.5 pr-10 border-2 border-blue-500 rounded-lg text-gray-900 hover:border-orange-500
-                       "
-                                                    placeholder="Create password"
+                                                    className="w-full px-3 py-2 border-2 border-blue-500 rounded-lg text-gray-900 hover:border-orange-500 transition-all duration-300"
+                                                    placeholder="Enter password"
                                                     required
                                                 />
                                                 <button
                                                     type="button"
+                                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
                                                     onClick={() => togglePasswordVisibility('password')}
-                                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 
-                        text-gray-500 hover:text-blue-500 transition-colors"
                                                 >
-                                                    {passwordVisible.password ? <Eye size={20} /> : <EyeOff size={20} />}
+                                                    {passwordVisible.password ? <EyeOff size={18} /> : <Eye size={18} />}
                                                 </button>
                                             </div>
                                         </div>
                                         <div>
                                             <label className="text-sm font-medium text-gray-700 mb-2 block">
-                                                Confirm Password <span className="text-red-500">*</span>
+                                                Confirm Password <span className="text-red-500 ml-1">*</span>
                                             </label>
                                             <div className="relative">
                                                 <input
-                                                    type={passwordVisible.confirmPassword ? "text" : "password"}
+                                                    type={passwordVisible.confirmPassword ? 'text' : 'password'}
                                                     name="confirmPassword"
                                                     value={formData.confirmPassword}
                                                     onChange={handleChange}
-                                                    className="w-full px-3 py-2.5 pr-10 border-2 border-blue-500 rounded-lg text-gray-900 hover:border-orange-500
-                        "
+                                                    className="w-full px-3 py-2 border-2 border-blue-500 rounded-lg text-gray-900 hover:border-orange-500 transition-all duration-300"
                                                     placeholder="Confirm password"
                                                     required
                                                 />
                                                 <button
                                                     type="button"
+                                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
                                                     onClick={() => togglePasswordVisibility('confirmPassword')}
-                                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 
-                        text-gray-500 hover:text-blue-500 transition-colors"
                                                 >
-                                                    {passwordVisible.confirmPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                                                    {passwordVisible.confirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                                 </button>
                                             </div>
+                                            {errors.confirmPassword && (
+                                                <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div className="flex justify-between mt-8">
-                        
-                            {currentSection === 2 && (
-                                <button
-                                
-                                    type="button"
-                                    
-                                    onClick={previousSection}
-                                    
-                                    className="flex items-center px-6 py-2.5 bg-orange-500 font-medium rounded-lg
-                                text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-colors"
-                                >
-                                {/* <ArrowLeft className="ml-2" size={20} /> */}
-                                    Previous
-                                   
-                                </button>
-                            )}
-
+                            <button
+                                type="button"
+                                onClick={previousSection}
+                                className={`px-5 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors duration-300 ${currentSection === 1 ? 'invisible' : 'visible'
+                                    }`}
+                            >
+                                <ArrowLeft className="mr-2 inline-block" size={18} />
+                                Previous
+                            </button>
                             {currentSection === 1 ? (
                                 <button
                                     type="button"
                                     onClick={nextSection}
-                                    className="flex items-center ml-auto px-6 py-2.5 bg-orange-500 text-white font-medium rounded-lg 
-        hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 
-        transition-colors duration-300"
+                                    className="px-6 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-300"
                                 >
                                     Next
-                                    <ArrowRight className="ml-2" size={20} />
+                                    <ArrowRight className="ml-2 inline-block" size={18} />
                                 </button>
                             ) : (
-                                loading ? (
-                                    <button className="flex items-center ml-auto px-6 py-2.5 bg-orange-500 text-white font-medium rounded-lg 
-        hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 
-        transition-colors duration-300"><Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </button>
-                                ) : (
-                                    <button
-                                        type="submit"
-                                        className="flex items-center px-6 py-2.5 bg-orange-500 text-white font-medium rounded-lg text-sm
-                                    hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-green-300 transition-colors"
-                                    >
-                                        Create Account
-                                    </button>
-
-                                )
+                                <button
+                                    type="submit"
+                                    className="px-5 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                                    disabled={loading}
+                                >
+                                    {loading ? (
+                                        <>
+                                            <Loader2 className="mr-2 inline-block animate-spin" size={18} />
+                                            Creating...
+                                        </>
+                                    ) : (
+                                        <>
+                                            Create Account
+                                            <UserPlus className="ml-2 inline-block" size={18} />
+                                        </>
+                                    )}
+                                </button>
                             )}
                         </div>
                         <div className="text-center mt-4">
-                            <p className="text-xs sm:text-sm text-gray-600">
+                            <p className="text-sm text-gray-600">
                                 Already have an account?{' '}
-                                <Link
-                                    to="/candidate_login"
-                                    onClick={navigateToLogin}
-                                    className="text-orange-500 font-semibold hover:text-orange-500 transition-colors"
-                                >
+                                <Link to="/candidate_login" className="text-orange-500 hover:text-blue-500">
                                     Login
                                 </Link>
                             </p>
@@ -422,8 +389,7 @@ const CandidateSignup = ({ navigateToLogin }) => {
                 </div>
             </div>
         </div>
+    );
+};
 
-    )
-}
-
-export default CandidateSignup
+export default CandidateSignup;

@@ -13,6 +13,8 @@ const TermsofService = () => {
           font:'bold',
           text: '4xl',
           textAlign: 'center',
+
+          
           padding: '20px',
         }}>
           <h1 className='font-bold text-4xl'>Terms of Service</h1>

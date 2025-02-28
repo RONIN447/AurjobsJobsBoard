@@ -17,8 +17,6 @@ function CompanyLogin() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(e.target.value)
-    console.log(name)
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -29,8 +27,7 @@ function CompanyLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData)
+
     try {
       setLoading(true)
       const res = await axios.post(`${BASEURL}/employers/EmployerLogin`, formData, {
@@ -80,21 +77,15 @@ function CompanyLogin() {
       setLoading(false)
     }
 
-
-    // setFormData({
-    //   email: "",
-    //   password: ""
-    // })
-
   };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-white">
-      <div className="flex flex-col md:flex-row w-full justify-center shadow-lg rounded-lg overflow-hidden">
+      <div className="flex flex-col md:flex-row w-full h-screen justify-center shadow-lg rounded-lg overflow-hidden">
 
         {/* Left: Form */}
         <div className="w-full md:w-1/2 flex justify-center items-center p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-md">
             <div className="text-center">
               <h2 className="text-3xl font-bold text-black mb-2">Login to your account</h2>
               <p className="text-gray-600">Welcome back!</p>
@@ -163,15 +154,12 @@ function CompanyLogin() {
           <img
             src={LoginImage}
             alt="Login"
-            className="w-full h-full object-cover rounded-lg"
+            className="w-full h-full object-cover "
           />
         </div>
       </div>
     </div>
   );
-
-
-
 }
 
 export default CompanyLogin;
