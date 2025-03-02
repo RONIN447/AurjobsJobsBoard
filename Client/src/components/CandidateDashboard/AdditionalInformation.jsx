@@ -60,6 +60,7 @@ const AdditionalInformation = ({ isEditing, candidateData, handleInputChange }) 
                 name="candidate_date_of_birth"
                 value={candidateData.candidate_date_of_birth || ''}
                 onChange={handleInputChange}
+                required
                 className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 group-hover:border-blue-300 transition-all duration-300 ease-in-out"
               />
             </>
@@ -100,7 +101,7 @@ const AdditionalInformation = ({ isEditing, candidateData, handleInputChange }) 
         </div>
 
         {/* Profile Status */}
-        <div className="relative group">
+        {/* <div className="relative group">
           {isEditing ? (
             <>
               <label className="block text-sm font-medium text-gray-700 mb-1 group-hover:text-blue-600 transition-colors duration-200">
@@ -128,7 +129,7 @@ const AdditionalInformation = ({ isEditing, candidateData, handleInputChange }) 
               </p>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </section>
   )

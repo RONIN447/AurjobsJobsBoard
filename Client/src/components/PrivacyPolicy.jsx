@@ -1,29 +1,16 @@
 import React from 'react';
-import './App.css';
 
-
-// import Logo from './images (4).jpeg'; // Adjust the path if necessary
 
 
 const PrivacyPolicy = () => {
-  // const headingColor = '#040736'; // Define the heading color
+  
 
   return (
     <div className="bg-gray-50 py-12">
       <div className="container mx-auto px-4 md:px-0">
-        {/* Logo Section */}
         
 
-          {/* Privacy Policy Image Banner */}
-          {/* <div className="flex justify-center mb-8">
-            <img
-              src={PrivacyPolicyImage}
-              alt="Privacy Policy Banner"
-              className="w-full rounded-md shadow-md" // Adjust width as needed
-            />
-          </div> */}
-
-        {/* Header Section */}
+        
         <div style={{
       backgroundColor: '#040736',
       color: 'white',
@@ -32,8 +19,8 @@ const PrivacyPolicy = () => {
       
     }}>
       <h1>Privacy Policy</h1>
-      <p>
-      </p>
+      {/* <p>
+      </p> */}
     </div>
 
 

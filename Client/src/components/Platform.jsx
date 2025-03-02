@@ -1,5 +1,6 @@
 import React from 'react'
 import TeamImg from "../assets/Team.png"
+import { Link } from 'react-router-dom'
 
 const Platform = () => {
   return (
@@ -9,15 +10,15 @@ const Platform = () => {
         <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
           {/* Left  Image */}
           <div className="relative">
-            
+
             <div className="mt-12 relative">
-              <img 
-                src={TeamImg} 
-                alt="Happy team members" 
+              <img
+                src={TeamImg}
+                alt="Happy team members"
                 className="rounded-xl w-full"
               />
-              
-              
+
+
             </div>
           </div>
 
@@ -36,9 +37,11 @@ const Platform = () => {
               The right job is out there.
             </p>
             <div className="flex gap-4">
-              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium">
-                Search Job
-              </button>
+              <Link to={"/jobs"}>
+                <button className="bg-blue-600 cursor-pointer text-white px-6 py-3 rounded-lg font-medium">
+                  Search Job
+                </button>
+              </Link>
               <button className="text-gray-600 px-6 py-3 font-medium">
                 Learn More
               </button>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Logo from '../assets/Aurjobs_Logo.jpg';
@@ -16,6 +16,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const dispatch = useDispatch()
+  const menuRef = useRef(null)
 
   //  console.log(candidateProfile)
 
@@ -65,7 +66,11 @@ const Navbar = () => {
     }
 
     return (
-      <div className="relative">
+      <div className="relative"
+      ref={menuRef}
+      onMouseEnter={() => setIsProfileMenuOpen(true)}
+      // onMouseLeave={() => setIsProfileMenuOpen(false)}
+      >
         <button
           onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
           className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100"
@@ -84,14 +89,10 @@ const Navbar = () => {
 
         {/* Profile Dropdown Menu */}
         {isProfileMenuOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
-            {/* <Link
-              to="/candidate_dashboard"
-              className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100"
-            >
-              <LayoutDashboard className="w-4 h-4 mr-2" />
-              Dashboard
-            </Link> */}
+          <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50"
+          onMouseLeave={() => setIsProfileMenuOpen(false)}
+          >
+           
             <Link
               // to="/candidate_dashboard"
               to={isAuthenticated ? "/candidate_dashboard" : "/employer_dashboard"}

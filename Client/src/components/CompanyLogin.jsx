@@ -30,7 +30,7 @@ function CompanyLogin() {
 
     try {
       setLoading(true)
-      const res = await axios.post(`${BASEURL}/employers/EmployerLogin`, formData, {
+      const res = await axios.post(`${BASEURL}/employers/Employer_Login`, formData, {
         headers: {
           "Content-Type": "application/json"
         },
@@ -150,7 +150,7 @@ function CompanyLogin() {
         </div>
 
         {/* Right: Image */}
-        <div className=" hidden md:block md:w-1/2 p-6 flex items-center justify-center bg-orange-500">
+        <div className=" hidden md:block md:w-1/2 p-6 items-center justify-center bg-orange-500">
           <img
             src={LoginImage}
             alt="Login"

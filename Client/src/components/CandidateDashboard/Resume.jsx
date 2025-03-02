@@ -87,6 +87,7 @@ const Resume = ({ isEditing, candidateData, handleInputChange }) => {
           ${isFocused ? 'border-purple-500 ring-4 ring-purple-100' : ''}
         `}
         placeholder={isEditing ? "Enter resume URL..." : ""}
+        required
       />
       
       {/* Status Indicator */}

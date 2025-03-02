@@ -158,6 +158,7 @@ const Education = ({ addEducationArrayItem, isEditing, removeEducationArrayItem,
                     className="w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 
                     focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
                     placeholder="Enter degree name"
+                    required
                   />
                 </div>
 
@@ -170,6 +171,7 @@ const Education = ({ addEducationArrayItem, isEditing, removeEducationArrayItem,
                     className="w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 
                     focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
                     placeholder="Enter education level"
+                    required
                   />
                 </div>
 
@@ -182,6 +184,7 @@ const Education = ({ addEducationArrayItem, isEditing, removeEducationArrayItem,
                     className="w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 
                     focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
                     placeholder="Enter institution name"
+                    required
                   />
                 </div>
 
@@ -194,6 +197,7 @@ const Education = ({ addEducationArrayItem, isEditing, removeEducationArrayItem,
                     className="w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 
                     focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
                     placeholder="Enter score"
+                   required
                   />
                 </div>
 
@@ -206,6 +210,7 @@ const Education = ({ addEducationArrayItem, isEditing, removeEducationArrayItem,
                     className="w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 
                     focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
                     placeholder="Enter start year"
+                    required
                   />
                 </div>
 
@@ -218,6 +223,7 @@ const Education = ({ addEducationArrayItem, isEditing, removeEducationArrayItem,
                     className="w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 
                     focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
                     placeholder="Enter end year"
+                    required
                   />
                 </div>
               </div>

@@ -56,7 +56,7 @@ const CompanyRegistration = ({ navigateToLogin }) => {
 
     try {
       setLoading(true)
-      const res = await axios.post(`${BASEURL}/employers/EmployerSignup`, formData, {
+      const res = await axios.post(`${BASEURL}/employers/Employer_Signup`, formData, {
         headers: {
           "Content-Type": "application/json"
         },

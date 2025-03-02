@@ -50,6 +50,7 @@ const Address = ({ candidateData, isEditing, handleAddressArrayItemChange, addAd
                     onChange={(e) => handleAddressArrayItemChange('addresses', address.address_id, 'candidate_address_line_1', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                     placeholder="Enter street address"
+                   required
                   />
                 </div>
 
@@ -63,6 +64,7 @@ const Address = ({ candidateData, isEditing, handleAddressArrayItemChange, addAd
                     onChange={(e) => handleAddressArrayItemChange('addresses', address.address_id, 'candidate_address_line_2', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                     placeholder="Apartment, suite, unit, etc. (optional)"
+                    required
                   />
                 </div>
 
@@ -76,6 +78,7 @@ const Address = ({ candidateData, isEditing, handleAddressArrayItemChange, addAd
                     onChange={(e) => handleAddressArrayItemChange('addresses', address.address_id, 'candidate_city', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                     placeholder="Enter city"
+                   required
                   />
                 </div>
 
@@ -89,6 +92,7 @@ const Address = ({ candidateData, isEditing, handleAddressArrayItemChange, addAd
                     onChange={(e) => handleAddressArrayItemChange('addresses', address.address_id, 'candidate_state', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                     placeholder="Enter state/province"
+                    required
                   />
                 </div>
 
@@ -102,6 +106,7 @@ const Address = ({ candidateData, isEditing, handleAddressArrayItemChange, addAd
                     onChange={(e) => handleAddressArrayItemChange('addresses', address.address_id, 'candidate_country', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                     placeholder="Enter country"
+                   required
                   />
                 </div>
 
@@ -115,6 +120,7 @@ const Address = ({ candidateData, isEditing, handleAddressArrayItemChange, addAd
                     onChange={(e) => handleAddressArrayItemChange('addresses', address.address_id, 'candidate_postal_code', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                     placeholder="Enter postal code"
+                   required
                   />
                 </div>
               </div>

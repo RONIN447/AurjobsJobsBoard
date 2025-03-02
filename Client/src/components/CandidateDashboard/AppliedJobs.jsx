@@ -234,6 +234,7 @@ const AppliedJobs = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {currentItems.map((application) => (
+                    
                     <tr
                       key={application.application_id}
                       className="hover:bg-gray-50 transition-colors"
@@ -253,18 +254,24 @@ const AppliedJobs = () => {
                         </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-gray-900">{application.jobs.job_title}</span>
+                        <Link to={`/jobs/${application.jobs.job_id}`}><span className="text-sm text-gray-900">{application.jobs.job_title}</span></Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
+                        <Link to={`/jobs/${application.jobs.job_id}`}>
                         <span className="text-sm text-gray-500">{formatDate(application.applied_at)}</span>
+                        </Link>
+                        
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
+                        <Link to={`/jobs/${application.jobs.job_id}`}>
                         <span className="text-sm text-gray-500">{application.jobs.job_location}</span>
+                        </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-gray-500">{application.jobs.employment_type}</span>
+                        <Link to={`/jobs/${application.jobs.job_id}`}><span className="text-sm text-gray-500">{application.jobs.employment_type}</span></Link>
                       </td>
                       <td className="px-6 py-4">
+                      <Link to={`/jobs/${application.jobs.job_id}`}>
                         <div className="flex flex-wrap gap-1">
                           {application.jobs.job_skills_required.map((skill, index) => (
                             <span
@@ -275,11 +282,14 @@ const AppliedJobs = () => {
                             </span>
                           ))}
                         </div>
+                        </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
+                        <Link to={`/jobs/${application.jobs.job_id}`}>
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${getStatusColor(application.status)}`}>
                           {application.status}
                         </span>
+                        </Link>
                       </td>
                     </tr>
                   ))}

@@ -17,15 +17,22 @@ import {
 import JobCard from '../components/JobCard';
 import axios from 'axios';
 import { BASEURL } from '../utility/config';
+import { useSearchParams } from 'react-router-dom';
+import JobCardSkeleton from '../components/JobCardSkeleton';
 
 const JobsPage = () => {
 
+    const [searchParams] = useSearchParams();
+    const keyword = searchParams.get('keyword');
+    const keywordLocation = searchParams.get('location');
+    const keywordIndustry = searchParams.get('industry');
+    console.log(keywordIndustry)
 
     const filterCategories = [
         {
             title: "Location",
             type: "input",
-            value: ""
+            value: keywordLocation || ""
         },
         {
             title: "Salary Range",
@@ -56,18 +63,19 @@ const JobsPage = () => {
     // State management
     const [jobs, setJobs] = useState();
     const [loading, setLoading] = useState(true);
+    const [jobLoading, setJobLoading] = useState(false);
     const [error, setError] = useState(null);
     const [filters, setFilters] = useState({
-        searchTerm: '',
+        searchTerm: keyword || '',
         jobTitle: 'all',
         workMode: 'all',
-        industryType: 'all',
+        industryType: keywordIndustry || 'all',
         workType: 'all',
         salaryRange: {
             min: '',
             max: ''
         },
-        location: '',
+        location: keywordLocation || '',
         categories: [...filterCategories]
     });
     const [sortBy, setSortBy] = useState('lastUpdated');
@@ -100,13 +108,6 @@ const JobsPage = () => {
         setFilters(newFilters);
     };
 
-    // const parseSalaryString = (salaryString) => {
-    //     // Extract numbers from strings like "$120,000 - $150,000/year"
-    //     const salary = parseInt(salaryString.replace(/[^0-9]/g, ''));
-
-    //     // If we have a valid number, return it as both min and max
-    //     return isNaN(salary) ? [0, 0] : [salary, salary];
-    // };
 
     const parseSalaryString = (salaryString) => {
         if (!salaryString) return 0;
@@ -130,20 +131,27 @@ const JobsPage = () => {
     const fetchAllJobs = async () => {
         try {
             console.log("APi calling initated")
+            setJobLoading(true); // Set loading to true before the API call
+            setError(null);
             const res = await axios.get(`${BASEURL}/jobs_post/jobs`, {
                 headers: {
                     "Content-Type": "application/json"
                 },
                 withCredentials: true
             })
-            console.log("Api called")
+            console.log("Api called") 
 
             console.log(res?.data)
+            setJobLoading(false);
             setJobs(res?.data);
+            // setLoading(false);
 
 
         } catch (err) {
             console.log(err)
+            setJobLoading(false);
+        }finally{
+            setJobLoading(false);
         }
     }
 
@@ -199,12 +207,7 @@ const JobsPage = () => {
         });
     };
 
-    // const matchesIndustryFilter = (jobIndustry, selectedIndustries) => {
-    //     if (selectedIndustries.length === 0) return true;
-    //     return selectedIndustries.some(industry =>
-    //         industry.label.toLowerCase() === jobIndustry.toLowerCase() && industry.checked
-    //     );
-    // };
+
 
     const clearAll = () => {
         setFilters({
@@ -613,13 +616,30 @@ const JobsPage = () => {
                         </div>
                     </div>
 
+                    {jobLoading ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {[...Array(6)].map((_, index) => (
+                                <JobCardSkeleton key={index} />
+                      
+                                
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {
+                           
+                                paginatedJobs.jobs.map(job => (
+                                    <JobCard key={job?.job_id} job={job} />
+                                ))
 
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {paginatedJobs.jobs.map(job => (
-                            <JobCard key={job?.job_id} job={job} />
-                        ))}
+                            
+                        }
                     </div>
+                    )}
+
+
+
+                    
 
                     {/* Pagination */}
 

@@ -1,8 +1,8 @@
 import supabase from "../config/supabase-client.js";
-import { createCandidate, findByCandidateEmail, findByCandidateID,  updateCandidate} from "../models/candidate-model.js";
+import { createCandidate, findByCandidateEmail, findByCandidateID, updateCandidate } from "../models/candidate-model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import _ from 'lodash';
 class CandidateController {
     //  Candidate Signup
     static async signupCandidate(req, res) {
@@ -76,9 +76,16 @@ class CandidateController {
         }
     }
 
+
+
+
+
+
+
+
     static async getCandidateProfile(req, res) {
         try {
-            const candidate_id = req.candidateId; // Ensure candidateId is set from authentication middleware
+            const candidate_id = req.params.id; // Ensure candidateId is set from authentication middleware
             console.log(candidate_id)
             if (!candidate_id) {
                 return res.status(400).json({ error: "Candidate ID is missing", success: false });
@@ -119,7 +126,7 @@ class CandidateController {
         }
     }
 
-  
+
 }
 
 

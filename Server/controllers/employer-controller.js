@@ -1,8 +1,10 @@
-import { createEmployer, findByEmployerEmail } from "../models/employer-model.js";
+import { createEmployer, findByEmployerEmail, employerDetails, updateEmployerDetails } from "../models/employer-model.js";
 import bcrypt from "bcrypt";
 import e from "cors";
 import jwt from "jsonwebtoken";
 
+
+// Employer Sign-up Function
 export const SignUpEmployer = async(req, res) => {
     try {
 
@@ -41,7 +43,6 @@ export const SignUpEmployer = async(req, res) => {
         return res.status(500).json({ error: "Internal Server Error", success: false });
     }
 };
-
 export const loginEmployer = async(req, res) => {
     const { company_email, company_password } = req.body;
 
@@ -67,10 +68,40 @@ export const loginEmployer = async(req, res) => {
         // Setting the token in the cookie
         res.cookie("authToken", token, { httpOnly: true });
 
+        const fullEmployerData = await employerDetails(employer.employer_id);
+        console.log("----------------------------------------------------------", fullEmployerData)
+
+        return res.status(200).json({
+            message: "Login successful",
+            token,
+            employer: fullEmployerData, // Returning full candidate details with related data
+            success: true,
+            // samesite:
+        });
+
+
         // Sending a success response
-        return res.status(200).json({ message: "Login successful", token, employer, success: true });
+        // return res.status(200).json({ message: "Login successful", token, employer, success: true });
     } catch (error) {
         console.error("Error during login:", error);
         return res.status(500).json({ error: "Internal Server Error", success: false });
     }
 };
+export const updateEmployer = async(req, res) => {
+    try {
+        const { id } = req.params;
+        const employerData = req.body;
+        // console.log("-----------------", employerData);
+        const updatedEmployer = await updateEmployerDetails(id, employerData);
+
+
+        if (!updatedEmployer.success) {
+            return res.status(500).json({ success: false, error: updatedEmployer.error });
+        }
+
+        return res.status(200).json({ updatedEmployer, success: true });
+    } catch (error) {
+        console.error("Error updating Employer profile:", error.message);
+        return res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+}

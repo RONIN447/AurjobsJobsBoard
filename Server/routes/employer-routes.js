@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { SignUpEmployer, loginEmployer } from "../controllers/employer-controller.js";
+import { SignUpEmployer, loginEmployer, updateEmployer } from "../controllers/employer-controller.js";
 
 const router = Router();
 
-router.post("/EmployerSignup", SignUpEmployer); // Handle Employer signup
-router.post("/EmployerLogin", loginEmployer); // Handle Employer login
+router.post("/Employer_Signup", SignUpEmployer); // Handle Employer signup
+router.post("/Employer_Login", loginEmployer); // Handle Employer login
+router.post("/Employer_Update_Profile/:id", updateEmployer); // Handle Employer login
 
 console.log("hey im in employer- route.js file")
 export default router;

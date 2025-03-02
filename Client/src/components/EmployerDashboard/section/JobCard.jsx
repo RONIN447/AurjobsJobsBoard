@@ -1,7 +1,7 @@
 // JobCard.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Briefcase, MapPin, DollarSign, ArrowRight, Users } from 'lucide-react';
+import { Briefcase, MapPin, DollarSign, ArrowRight, Users,IndianRupee } from 'lucide-react';
 
 const JobCard = ({ job }) => {
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ const JobCard = ({ job }) => {
                     </div>
 
                     <div className="flex items-center gap-2 text-gray-600">
-                        <DollarSign className="w-5 h-5 text-green-500" />
+                        <IndianRupee className="w-5 h-5 text-green-500" />
                         <p>{job.salary_range}</p>
                     </div>
 
@@ -54,11 +54,12 @@ const JobCard = ({ job }) => {
                     </div>
 
                     <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium ${
-                        job.status === 'Open' 
+                        job.status === 'active' 
                             ? 'bg-green-100 text-green-700' 
                             : 'bg-red-100 text-red-700'
                     }`}>
                         Status: {job.status}
+                        {console.log(job.status)}
                     </div>
 
                     <button
@@ -75,3 +76,5 @@ const JobCard = ({ job }) => {
 };
 
 export default JobCard;
+
+

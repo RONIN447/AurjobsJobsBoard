@@ -166,7 +166,8 @@ export const createJobPost = async (
 
 export const createJobApplication = async (
   job_id,
-  candidate_id
+  candidate_id,
+  screening_score
 ) => {
   try {
     const { data, error } = await supabase
@@ -175,6 +176,7 @@ export const createJobApplication = async (
         job_id,
         candidate_id,
         status: 'pending',
+        screening_score,
         applied_at: new Date().toISOString(),
       }])
       .select("*");
@@ -239,43 +241,161 @@ export const Job_application = async (job_id) => {
   }
 };
 
-export const getCandidatesForJob = async (job_id) => {
+export const getCandidatesForJob = async(job_id) => {
+
   try {
-    // Step 1: Fetch all applications for the given job_id
-    const { data: applications, error: applicationError } = await supabase
-      .from("applications")
-      .select("candidate_id")
-      .eq("job_id", job_id);
 
-    if (applicationError) throw applicationError;
+      // Step 1: Fetch all applications for the given job_id, including screening_score
 
-    if (!applications || applications.length === 0) {
-      return { message: "No candidates have applied for this job." };
-    }
+      const { data: applications, error: applicationError } = await supabase
 
-    // Step 2: Extract candidate_ids from the applications
-    const candidateIds = applications.map((application) => application.candidate_id);
+          .from("applications")
 
-    // Step 3: Fetch candidate details using the candidate_ids
-    const { data: candidates, error: candidateError } = await supabase
-      .from("candidates")
-      .select("*")
-      .in("candidate_id", candidateIds);
+          .select("candidate_id, screening_score")
 
-    if (candidateError) throw candidateError;
-    if (!candidates || candidates.length === 0) {
-      return { message: "No candidate details found." };
-    }
+          .eq("job_id", job_id);
 
-    // Step 4: Combine application and candidate details (optional)
-    const result = candidates.map((candidate) => ({
-      ...candidate,
-      job_id: job_id, // Include the job_id for clarity
-    }));
 
-    return result; // Returning the candidate details with job information
+
+      if (applicationError) throw applicationError;
+
+
+
+      if (!applications || applications.length === 0) {
+
+          return { message: "No candidates have applied for this job." };
+
+      }
+
+
+
+      // Step 2: Extract candidate_ids and their screening_scores
+
+      const candidateMap = applications.reduce((acc, app) => {
+
+          acc[app.candidate_id] = app.screening_score;
+
+          return acc;
+
+      }, {});
+
+
+
+      const candidateIds = Object.keys(candidateMap);
+
+
+
+      // Step 3: Fetch all candidate details in parallel
+
+      const candidateDetailsPromises = candidateIds.map(async(candidateID) => {
+
+          const [
+
+              candidate,
+
+              experiences,
+
+              skills,
+
+              languages,
+
+              education,
+
+              certifications,
+
+              addresses
+
+          ] = await Promise.all([
+
+              supabase.from("candidates").select("*").eq("candidate_id", candidateID).single(),
+
+              supabase.from("candidate_experience").select("*").eq("candidate_id", candidateID),
+
+              supabase.from("candidate_skills").select("*").eq("candidate_id", candidateID),
+
+              supabase.from("candidate_languages").select("*").eq("candidate_id", candidateID),
+
+              supabase.from("candidate_education").select("*").eq("candidate_id", candidateID),
+
+              supabase.from("candidate_certifications").select("*").eq("candidate_id", candidateID),
+
+              supabase.from("candidate_address").select("*").eq("candidate_id", candidateID)
+
+          ]);
+
+
+
+          if (candidate.error) {
+
+              console.error(`Error fetching candidate ${candidateID}:`, candidate.error.message);
+
+              return null;
+
+          }
+
+
+
+          return {
+
+              ...candidate.data,
+
+              job_id,
+
+              screening_score: candidateMap[candidateID], // Include screening_score
+
+              experiences: experiences.data || [],
+
+              skills: skills.data || [],
+
+              languages: languages.data || [],
+
+              education: education.data || [],
+
+              certifications: certifications.data || [],
+
+              addresses: addresses.data || []
+
+          };
+
+      });
+
+
+
+      // Wait for all candidate details to resolve
+
+      const candidates = await Promise.all(candidateDetailsPromises);
+
+
+
+      // Filter out any null results (in case of errors)
+
+      const validCandidates = candidates.filter((candidate) => candidate !== null);
+
+
+
+      if (validCandidates.length === 0) {
+
+          return { message: "No detailed candidate information found." };
+
+      }
+
+
+
+      return validCandidates;
+
   } catch (error) {
-    console.error("Error fetching candidates for job:", error.message);
-    return { error: error.message };
+
+      console.error("Error fetching candidates for job:", error.message);
+
+      return { error: error.message };
+
   }
+
 };
+
+
+
+
+
+
+
